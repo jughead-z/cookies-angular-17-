@@ -1,6 +1,16 @@
-<div *ngIf="!cookieAccepted" class="cookie-banner">
-    <p>We use cookies to ensure you get the best experience on our website.</p>
-    <button (click)="acceptCookies()">Accept</button>
-    <button (click)="denyCookies()">Deny</button>
+<div *ngIf="!cookieAccepted" class="wrapper" [class.fade-out]="isFadingOut">
+  <div class="title-box">
+    <i class="bx bx-cookie"></i>
+    <h3>Cookies Consent</h3>
   </div>
-  
+  <div class="info">
+    <p>
+      This website use cookies to help you have a superior and more relevant
+      browsing experience on the website. <a href="#"> Read more...</a>
+    </p>
+  </div>
+  <div class="buttons">
+    <button class="button" (click)="acceptCookies()">Accept</button>
+    <button class="button"  (click)="denyCookies()">Deny</button>
+  </div>
+</div>

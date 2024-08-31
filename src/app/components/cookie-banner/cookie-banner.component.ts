@@ -12,6 +12,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';  // Add isPla
 export class CookieBannerComponent implements OnInit {
   cookieAccepted = false;
   isBrowser = false;  // Initialize with default value
+  isFadingOut = false;  // Track fade-out state
+
 
   constructor(
     private cookieService: CookieService,
@@ -31,6 +33,8 @@ export class CookieBannerComponent implements OnInit {
     if (this.isBrowser) {
       this.cookieService.setCookie('cookieConsent', 'accepted', 365);
       this.cookieAccepted = true;
+      this.triggerFadeOut();
+
     }
   }
 
@@ -38,7 +42,16 @@ export class CookieBannerComponent implements OnInit {
     if (this.isBrowser) {
       this.cookieService.setCookie('cookieConsent', 'denied', 365);
       this.cookieAccepted = true;
+      this.triggerFadeOut();
+
     }
+  }
+
+  triggerFadeOut(): void {
+    this.isFadingOut = true;
+    setTimeout(() => {
+      this.cookieAccepted = true; // This hides the banner after fade-out
+    }, 1000); // Match this to the CSS fade-out duration (1s)
   }
 }
 
